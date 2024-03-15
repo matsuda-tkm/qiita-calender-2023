@@ -19,7 +19,6 @@ UUID = {
 def unix_to_jst(unix_time, return_str=False):
     '''Convert UNIX time to JST time'''
     jst_time = datetime.datetime.fromtimestamp(unix_time)
-    jst_time += datetime.timedelta(hours=9)
     if return_str:
         return jst_time.strftime("%Y/%m/%d %H:%M:%S")
     else:
