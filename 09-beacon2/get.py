@@ -3,8 +3,8 @@ import os
 import datetime
 import asyncio
 import struct
-from tqdm import tqdm
 import bleak
+from loguru import logger
 
 UUID = {
     'latestData': '3001',
@@ -24,7 +24,7 @@ def unix_to_jst(unix_time, return_str=False):
     else:
         return jst_time
 
-async def connect(device_name, loop, datefrom, output):
+async def connect(device_name, datefrom, output):
     datefrom = datetime.datetime.strptime(datefrom, '%Y/%m/%d %H:%M:%S')
     break_flag = False
 
@@ -32,17 +32,19 @@ async def connect(device_name, loop, datefrom, output):
     devices = await bleak.BleakScanner.discover()
     device = next((d for d in devices if d.name == device_name), None)
     if not device:
+        for d in devices:
+            logger.debug(f'Found device: {d.name}')
         raise bleak.exc.BleakDeviceNotFoundError(f'Device "{device_name}" not found.')
 
     # Connect to the device
-    async with bleak.BleakClient(device, loop=loop) as client:
-        print('Connected!')
+    async with bleak.BleakClient(device) as client:
+        logger.success('Connected!')
 
         # Get the latest page
         data = await client.read_gatt_char(f'0c4c{UUID["latestPage"]}-7700-46f4-aa96-d5e974e32a54')
         (latest_page_time, interval, latest_page, latest_row) = struct.unpack('<IHHB', data)
         latest_page_time = unix_to_jst(latest_page_time + interval * latest_row)
-        print(f'Latest page: {latest_page}, Latest row: {latest_row}, Latest page time: {latest_page_time}')
+        logger.info(f'Latest page: {latest_page}, Latest row: {latest_row}, Latest page time: {latest_page_time}')
 
         # Get the page data
         for page in reversed(range(latest_page + 1)):
@@ -56,7 +58,7 @@ async def connect(device_name, loop, datefrom, output):
                 (flag, start_time) = struct.unpack('<BI', response_flag)
                 retry += 1
                 if retry > 1:
-                    print(f'Retrying request page (Page:{page}, Status:{flag})')
+                    logger.warning(f'Retrying request page (Page:{page}, Status:{flag})')
             # Get the page data
             for row in reversed(range(latest_row+1 if page == latest_page else 12+1)):
                 if unix_to_jst(start_time + interval * row) < datefrom:  # Do not retrieve data before the specified date and time
@@ -80,8 +82,7 @@ async def connect(device_name, loop, datefrom, output):
             if break_flag:
                 break
 
-
-if __name__ == '__main__':
+async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--datefrom', type=str, help='Date from(YYYY/MM/DD HH:MM:SS)')
     parser.add_argument('-o', '--output', type=str, help='Output file name')
@@ -95,10 +96,12 @@ if __name__ == '__main__':
 
     while True:
         try:
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(connect('Env', loop, args.datefrom, args.output))
+            await connect('EnvSensor-BL01', args.datefrom, args.output)
             break
         except asyncio.exceptions.TimeoutError:
-            print('Timeout. Retrying...')
+            logger.warning('Timeout. Retrying...')
         except bleak.exc.BleakDeviceNotFoundError:
-            print('Device not found. Retrying...')
+            logger.warning('Device not found. Retrying...')
+
+if __name__ == '__main__':
+    asyncio.run(main())
