@@ -1,2 +1,31 @@
 # qiita-calender-2023
-Qiita Advent Calender 2023「気象分野でPython＆機械学習」のソースコードです。
+Qiita Advent Calender 2023「[気象分野でPython＆機械学習](https://qiita.com/advent-calendar/2023/weather-python-and-ml)」のソースコードです。
+
+- 01-JMA_data_analytics
+    - [【気象データで時系列解析①】定常性](https://qiita.com/matsuda_tkm/items/ab7e1e4e527feb815883)
+    - [【気象データで時系列解析②】自己相関係数・偏自己相関係数](https://qiita.com/matsuda_tkm/items/8a7958b0127c28c73029)
+    - [【気象データで時系列分析③】フーリエ変換](https://qiita.com/matsuda_tkm/items/1e5c68662386a7616793)
+    - [【気象データで時系列解析④】ARモデル](https://qiita.com/matsuda_tkm/items/8f0ca38e3b6e03de192d)
+    - [【気象データで時系列解析⑤】MAモデル・ARMAモデル](https://qiita.com/matsuda_tkm/items/a6116d5ddf8dea2508c9)
+    - [【気象データで時系列解析⑥】ARIMAモデル](https://qiita.com/matsuda_tkm/items/2ed9b56165cd36c3c6c6)
+    - [【気象データで時系列解析⑦】SARIMAモデル](https://qiita.com/matsuda_tkm/items/6a373bf1dcc312519479)
+- 02-weathermap
+    - [2023年の天気図をGIFアニメーションで振り返ってみる](https://qiita.com/matsuda_tkm/items/f8352c9baeebb296e3ed)
+- 03-YOLP
+    - [Yahoo!の雨雲レーダー情報をPythonで取得する](https://qiita.com/matsuda_tkm/items/778caac168ad95863ebd)
+- 04-distance
+    - [経度緯度の情報から「測地線航海算法」で距離を計算する](https://qiita.com/matsuda_tkm/items/4eba5632535ca2f699b4)
+- 05-cartpy
+    - [【Cartpy入門】Pythonで地図上にグラフを描画する](https://qiita.com/matsuda_tkm/items/4566b81f7341b155688a)
+- 06-forecast_eval
+    - [【気象予報】予報精度の評価指標を計算してみる](https://qiita.com/matsuda_tkm/items/da4e99b905a6d895be00)
+- 07-vorticity
+    - [【Python】風データから渦度を計算してみる]https://qiita.com/matsuda_tkm/items/2f25debc907de3815849)
+- 08-monitoring-jma-forecast
+    - [気象庁の天気予報追跡Webアプリを作った](https://qiita.com/matsuda_tkm/items/94347eac9bedc028faeb)
+- 09-beacon2
+    - [【気象観測】Windows＆PythonでWxBeacon2からデータ取得](https://qiita.com/matsuda_tkm/items/a964399f583aab3803ce)
+- 10-rainfall
+    - [月間降水日数を計算してみる](https://qiita.com/matsuda_tkm/items/65e0d84f6b343b8c330c)
+- 11-emagram
+    - [エマグラムをPythonで描画する](https://qiita.com/matsuda_tkm/items/d5b26d91a64f26b5b701)
