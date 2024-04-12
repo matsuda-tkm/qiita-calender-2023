@@ -20,7 +20,7 @@ Qiita Advent Calender 2023「[気象分野でPython＆機械学習](https://qiit
 - 06-forecast_eval
     - [【気象予報】予報精度の評価指標を計算してみる](https://qiita.com/matsuda_tkm/items/da4e99b905a6d895be00)
 - 07-vorticity
-    - [【Python】風データから渦度を計算してみる]https://qiita.com/matsuda_tkm/items/2f25debc907de3815849)
+    - [【Python】風データから渦度を計算してみる](https://qiita.com/matsuda_tkm/items/2f25debc907de3815849)
 - 08-monitoring-jma-forecast
     - [気象庁の天気予報追跡Webアプリを作った](https://qiita.com/matsuda_tkm/items/94347eac9bedc028faeb)
 - 09-beacon2
